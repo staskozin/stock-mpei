@@ -6,6 +6,7 @@ import { validateProducts } from './validators'
 
 import s from './ProductsTable.module.scss'
 import 'reactjs-popup/dist/index.css'
+import { formatPrice } from '../../helpers'
 
 const ProductsTable = (props: { products: Array<Product>, dispatch: any }) => {
   const [name, setName] = useState<string>('')
@@ -34,7 +35,7 @@ const ProductsTable = (props: { products: Array<Product>, dispatch: any }) => {
                 return (
                   <tr key={p.name}>
                     <td>{p.name}</td>
-                    <td>{p.price}</td>
+                    <td>{formatPrice(p.price)}</td>
                     <td>{p.quantity}</td>
                     <td className={s['button-wrap']}>
                       <button className={s.button} onClick={() => {
@@ -80,7 +81,7 @@ const ProductsTable = (props: { products: Array<Product>, dispatch: any }) => {
           <input
             type="number"
             value={price}
-            onChange={(e) => setPrice(Number.parseInt(e.target.value))}
+            onChange={(e) => setPrice(Number.parseFloat(e.target.value))}
           />
         </label>
 
