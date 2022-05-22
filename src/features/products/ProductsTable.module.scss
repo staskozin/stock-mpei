@@ -1,0 +1,57 @@
+.label {
+  display: block;
+
+  span {
+    display: block;
+  }
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+
+  td {
+    border-bottom: 1px solid #cacaca;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  th {
+    text-align: left;
+    border-bottom: 1px solid #808080;
+  }
+
+  .th-empty {
+    padding: 0;
+  }
+
+  td,
+  th {
+    padding: 8px 8px 8px 64px;
+
+    &:first-child {
+      padding-left: 8px;
+    }
+  }
+}
+
+.button-wrap {
+  text-align: center;
+  padding-left: 16px !important;
+}
+
+.button {
+  border: none;
+  appearance: none;
+  background: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+
+  img {
+    position: relative;
+    top: 3px;
+  }
+}

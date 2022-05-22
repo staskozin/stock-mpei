@@ -1,0 +1,22 @@
+.header {
+  margin-bottom: 32px;
+}
+
+.link {
+  font-size: 24px;
+  line-height: 28px;
+  margin-right: 32px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.selected {
+  color: #000;
+  cursor: text;
+
+  &:hover {
+    color: #000;
+  }
+}
