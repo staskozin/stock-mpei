@@ -12,6 +12,17 @@ export type OrdersState = Array<Order>
 
 const initialState: OrdersState = [
   {
+    "number": 2,
+    "date": new Date("2022-05-01T10:12:58.676Z"),
+    "products": [
+      {
+        "name": "LADA (ВАЗ) Kalina I",
+        "price": 189000,
+        "quantity": 1
+      }
+    ]
+  },
+  {
     "number": 1,
     "date": new Date("2022-05-01T06:32:10.409Z"),
     "products": [
@@ -26,17 +37,6 @@ const initialState: OrdersState = [
         "quantity": 1
       }
     ]
-  },
-  {
-    "number": 2,
-    "date": new Date("2022-05-01T10:12:58.676Z"),
-    "products": [
-      {
-        "name": "LADA (ВАЗ) Kalina I",
-        "price": 189000,
-        "quantity": 1
-      }
-    ]
   }
 ]
 
@@ -45,7 +45,7 @@ export const ordersSlice = createSlice({
   initialState,
   reducers: {
     create: (state, action: PayloadAction<Order>) => {
-      
+
     },
     remove: (state, action: PayloadAction<number>) => {
       const index = state.findIndex((o: Order) => o.number === action.payload)

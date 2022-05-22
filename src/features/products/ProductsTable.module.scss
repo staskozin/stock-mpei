@@ -9,6 +9,8 @@
 .table {
   border-collapse: collapse;
   width: 100%;
+  position: relative;
+  left: -8px;
 
   td {
     border-bottom: 1px solid #cacaca;

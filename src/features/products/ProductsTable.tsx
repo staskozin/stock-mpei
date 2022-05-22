@@ -8,7 +8,7 @@ import s from './ProductsTable.module.scss'
 import 'reactjs-popup/dist/index.css'
 import { formatPrice } from '../../helpers'
 
-const ProductsTable = (props: { products: Array<Product>, dispatch: any }) => {
+const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
   const [name, setName] = useState<string>('')
   const [changingName, setChangingName] = useState('')
   const [price, setPrice] = useState<number>(0)
@@ -26,8 +26,15 @@ const ProductsTable = (props: { products: Array<Product>, dispatch: any }) => {
                 <th>Наименование</th>
                 <th>Цена</th>
                 <th>Кол&#8209;во</th>
-                <th className={s['th-empty']}></th>
-                <th className={s['th-empty']}></th>
+                {
+                  dispatch
+                    ? <>
+                      <th className={s['th-empty']}></th>
+                      <th className={s['th-empty']}></th>
+                    </>
+                    : null
+                }
+
               </tr>
             </thead>
             <tbody>
@@ -37,22 +44,28 @@ const ProductsTable = (props: { products: Array<Product>, dispatch: any }) => {
                     <td>{p.name}</td>
                     <td>{formatPrice(p.price)}</td>
                     <td>{p.quantity}</td>
-                    <td className={s['button-wrap']}>
-                      <button className={s.button} onClick={() => {
-                        setName(p.name)
-                        setPrice(p.price)
-                        setQuantity(p.quantity)
-                        setChangingName(p.name)
-                        setIsEditing(true)
-                      }}>
-                        <img src='/icon/edit.svg' alt='Изменить товар' />
-                      </button>
-                    </td>
-                    <td className={s['button-wrap']}>
-                      <button className={s.button} onClick={() => dispatch(remove(p.name))}>
-                        <img src='/icon/delete.svg' alt='Удалить товар' />
-                      </button>
-                    </td>
+                    {
+                      dispatch
+                        ? <>
+                          <td className={s['button-wrap']}>
+                            <button className={s.button} onClick={() => {
+                              setName(p.name)
+                              setPrice(p.price)
+                              setQuantity(p.quantity)
+                              setChangingName(p.name)
+                              setIsEditing(true)
+                            }}>
+                              <img src='/icon/edit.svg' alt='Изменить товар' />
+                            </button>
+                          </td>
+                          <td className={s['button-wrap']}>
+                            <button className={s.button} onClick={() => dispatch(remove(p.name))}>
+                              <img src='/icon/delete.svg' alt='Удалить товар' />
+                            </button>
+                          </td>
+                        </>
+                        : null
+                    }
                   </tr>
                 )
               })}
