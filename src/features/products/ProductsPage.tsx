@@ -5,7 +5,7 @@ import Popup from 'reactjs-popup'
 import {
   create,
   selectProducts
-} from './productSlice'
+} from './productsSlice'
 import ProductsTable from './ProductsTable'
 import Header from '../../components/Header'
 import { validateCreateProduct } from './validators'

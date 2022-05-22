@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Popup from 'reactjs-popup'
 
-import { change, Product, remove } from './productSlice'
+import { change, Product, remove } from './productsSlice'
 import { validateProducts } from './validators'
 
 import s from './ProductsTable.module.scss'

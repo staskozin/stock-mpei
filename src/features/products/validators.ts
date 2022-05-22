@@ -1,4 +1,4 @@
-import { Product } from './productSlice'
+import { Product } from './productsSlice'
 
 const MAX_QUANTITY = 256
 
