@@ -9,6 +9,7 @@ import {
 } from './ordersSlice'
 
 import s from './OrdersPage.module.scss'
+import Button from '../../components/Button'
 
 const OrdersPage = () => {
   const orders = useAppSelector(selectOrders)
@@ -17,6 +18,10 @@ const OrdersPage = () => {
   return (
     <>
       <Header />
+      <Button
+        text='Создать заказ'
+        handler={() => { }}
+      />
       {
         orders.map((o: Order) => {
           const sum = o.products.reduce((acc, cur) => {
