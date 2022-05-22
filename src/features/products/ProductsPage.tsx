@@ -9,6 +9,7 @@ import {
 import ProductsTable from './ProductsTable'
 import Header from '../../components/Header'
 import { validateCreateProduct } from './validators'
+import Button from '../../components/Button'
 
 import s from './Products.module.scss'
 
@@ -24,14 +25,15 @@ const ProductsPage = () => {
     <>
       <Header />
       <div>
-        <button className={s.button} onClick={() => {
-          setName('')
-          setPrice(0)
-          setQuantity(0)
-          setIsAdding(true)
-        }}>
-          Добавить товар
-        </button>
+        <Button
+          text='Добавить товар'
+          handler={() => {
+            setName('')
+            setPrice(0)
+            setQuantity(0)
+            setIsAdding(true)
+          }}
+        />
         <Popup
           open={isAdding}
           position='left center'
