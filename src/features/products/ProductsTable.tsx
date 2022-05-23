@@ -10,7 +10,7 @@ import { formatPrice } from '../../helpers'
 
 const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
   const [name, setName] = useState<string>('')
-  const [changingName, setChangingName] = useState('')
+  const [changingName, setChangingName] = useState<string>('')
   const [price, setPrice] = useState<number>(0)
   const [quantity, setQuantity] = useState<number>(0)
   const [isEditing, setIsEditing] = useState<boolean>(false)
