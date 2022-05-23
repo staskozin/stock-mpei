@@ -4,10 +4,10 @@ import {
   Routes
 } from 'react-router-dom'
 
-import ProductsPage from './features/products/ProductsPage'
-import OrdersPage from './features/orders/OrdersPage'
+import ProductsPage from './ProductsPage'
+import OrdersPage from './OrdersPage'
 
-function App() {
+function Router() {
   return (
     <BrowserRouter>
       <Routes>
@@ -18,4 +18,4 @@ function App() {
   )
 }
 
-export default App
+export default Router

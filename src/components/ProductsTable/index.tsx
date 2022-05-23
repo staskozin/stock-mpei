@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import Popup from 'reactjs-popup'
 
-import { change, Product, remove } from './productsSlice'
-import { validateProducts } from './validators'
+import { change, Product, remove } from '../../store/products/productsSlice'
+import { validateProducts } from '../../store/products/validators'
 
 import s from './ProductsTable.module.scss'
 import 'reactjs-popup/dist/index.css'
 import { formatPrice } from '../../helpers'
+import IconButton from '../UI/IconButton'
+import Input from '../UI/Input'
+import Button from '../UI/Button'
 
 const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
   const [name, setName] = useState<string>('')
@@ -48,20 +51,16 @@ const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
                       dispatch
                         ? <>
                           <td className={s['button-wrap']}>
-                            <button className={s.button} onClick={() => {
+                            <IconButton icon='edit' handler={() => {
                               setName(p.name)
                               setPrice(p.price)
                               setQuantity(p.quantity)
                               setChangingName(p.name)
                               setIsEditing(true)
-                            }}>
-                              <img src='/icon/edit.svg' alt='Изменить товар' />
-                            </button>
+                            }} />
                           </td>
                           <td className={s['button-wrap']}>
-                            <button className={s.button} onClick={() => dispatch(remove(p.name))}>
-                              <img src='/icon/delete.svg' alt='Удалить товар' />
-                            </button>
+                            <IconButton icon='delete' handler={() => dispatch(remove(p.name))} />
                           </td>
                         </>
                         : null
@@ -79,35 +78,28 @@ const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
         modal
         onClose={() => { setIsEditing(false) }}
       >
-        <button onClick={() => { setIsEditing(false) }}>×</button>
-        <label className={s.label}>
-          <span>Наименование</span>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-
-        <label className={s.label}>
-          <span>Цена</span>
-          <input
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(Number.parseFloat(e.target.value))}
-          />
-        </label>
-
-        <label className={s.label}>
-          <span>Количество</span>
-          <input
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(Number.parseInt(e.target.value))}
-          />
-        </label>
-        <button
-          onClick={() => {
+        <IconButton icon='close' handler={() => setIsEditing(false)} />
+        <Input
+          label='Наименование'
+          type='text'
+          value={name}
+          handler={(e) => setName(e.target.value)}
+        />
+        <Input
+          label='Цена'
+          type='number'
+          value={price}
+          handler={(e) => setPrice(Number.parseFloat(e.target.value))}
+        />
+        <Input
+          label='Количество'
+          type='number'
+          value={quantity}
+          handler={(e) => setQuantity(Number.parseInt(e.target.value))}
+        />
+        <Button
+          text='Изменить'
+          handler={() => {
             const productsCopy: Array<Product> = JSON.parse(JSON.stringify(products))
             const index = products.findIndex((p: Product) => p.name === changingName)
             if (index !== -1) {
@@ -119,9 +111,7 @@ const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
               alert('Товар не найден')
             }
           }}
-        >
-          ИЗМЕНИТЬ ТОВАР
-        </button>
+        />
       </Popup>
     </>
 

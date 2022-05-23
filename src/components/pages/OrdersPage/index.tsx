@@ -2,19 +2,20 @@ import { useState } from 'react'
 import Popup from 'reactjs-popup'
 import Select from 'react-select'
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import Header from '../../components/Header'
-import { formatPrice } from '../../helpers'
-import ProductsTable from '../products/ProductsTable'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import Header from '../../Header'
+import { formatPrice } from '../../../helpers'
+import ProductsTable from '../../ProductsTable'
 import {
   Order,
   remove,
   selectOrders
-} from './ordersSlice'
-import { Product, selectProducts } from '../products/productsSlice'
+} from '../../../store/orders/ordersSlice'
+import { Product, selectProducts } from '../../../store/products/productsSlice'
 
 import s from './OrdersPage.module.scss'
-import Button from '../../components/Button'
+import Button from '../../UI/Button'
+import IconButton from '../../UI/IconButton'
 
 
 const OrdersPage = () => {
@@ -45,9 +46,7 @@ const OrdersPage = () => {
                 <time className={s.datetime} dateTime={o.date.toISOString()}>
                   от {o.date.toLocaleString('ru-RU')}
                 </time>
-                <button className={s.button} onClick={() => dispatch(remove(o.number))}>
-                  <img src='/icon/delete.svg' alt='Удалить заказ' />
-                </button>
+                <IconButton icon='delete' handler={() => dispatch(remove(o.number))} />
                 <span className={s.sum}>Сумма: <span>{formatPrice(sum)}</span></span>
                 <ProductsTable products={o.products} />
               </div>
@@ -61,7 +60,7 @@ const OrdersPage = () => {
         modal
         onClose={() => { setIsCreating(false) }}
       >
-        <button onClick={() => { setIsCreating(false) }}>×</button>
+        <IconButton icon='close' handler={() => setIsCreating(false)} />
         <label className={s.label}>
           <span>Товар</span>
           <Select
@@ -75,18 +74,19 @@ const OrdersPage = () => {
               setSearchedProduct(s.value)
             }}
           />
-          <button
-            disabled={!searchedProduct?.name}
-            onClick={() => {
-              if (!addedProducts.find(p => p.name === searchedProduct?.name)) {
-                setAddedProducts([...addedProducts, searchedProduct as Product])
-                setSearchedProduct(null)
-              } else {
-                alert('Товар уже добавлен в заказ')
-              }
-            }}
-          >Добавить</button>
         </label>
+        <Button
+          text='Создать'
+          disabled={!searchedProduct?.name}
+          handler={() => {
+            if (!addedProducts.find(p => p.name === searchedProduct?.name)) {
+              setAddedProducts([...addedProducts, searchedProduct as Product])
+              setSearchedProduct(null)
+            } else {
+              alert('Товар уже добавлен в заказ')
+            }
+          }}
+        />
         <ProductsTable products={addedProducts} />
       </Popup>
     </>
