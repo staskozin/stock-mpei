@@ -94,11 +94,13 @@ const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
       }
       <Popup
         open={isEditing}
-        position='center center'
         modal
         onClose={() => { setIsEditing(false) }}
       >
-        <IconButton icon='close' handler={() => setIsEditing(false)} />
+        <div className="popup-header">
+          <h2>Редактирование товара</h2>
+          <IconButton icon='close' handler={() => setIsEditing(false)} />
+        </div>
         <Input
           label='Наименование'
           type='text'

@@ -39,7 +39,10 @@ const ProductsPage = () => {
         modal
         onClose={() => { setIsAdding(false) }}
       >
-        <IconButton icon='close' handler={() => setIsAdding(false)} />
+        <div className="popup-header">
+          <h2>Добавление товара</h2>
+          <IconButton icon='close' handler={() => setIsAdding(false)} />
+        </div>
         <Input
           label='Наименование'
           type='text'

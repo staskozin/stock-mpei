@@ -16,6 +16,7 @@ import { Product, selectProducts } from '../../../store/products/productsSlice'
 import s from './OrdersPage.module.scss'
 import Button from '../../UI/Button'
 import IconButton from '../../UI/IconButton'
+import Input from '../../UI/Input'
 
 
 const OrdersPage = () => {
@@ -61,7 +62,10 @@ const OrdersPage = () => {
         modal
         onClose={() => { setIsCreating(false) }}
       >
-        <IconButton icon='close' handler={() => setIsCreating(false)} />
+        <div className="popup-header">
+          <h2>Создание заказа</h2>
+          <IconButton icon='close' handler={() => setIsCreating(false)} />
+        </div>
         <label className={s.label}>
           <span>Товар</span>
           <Select
@@ -76,8 +80,14 @@ const OrdersPage = () => {
             }}
           />
         </label>
+        <Input
+          label='Кол-во'
+          type='number'
+          value={0}
+          handler={() => { }}
+        />
         <Button
-          text='Создать'
+          text='Добавить'
           disabled={!searchedProduct?.name}
           handler={() => {
             if (!addedProducts.find(p => p.name === searchedProduct?.name)) {
@@ -89,6 +99,18 @@ const OrdersPage = () => {
           }}
         />
         <ProductsTable products={addedProducts} />
+        <Button
+          text='Создать заказ'
+          disabled={!searchedProduct?.name}
+          handler={() => {
+            if (!addedProducts.find(p => p.name === searchedProduct?.name)) {
+              setAddedProducts([...addedProducts, searchedProduct as Product])
+              setSearchedProduct(null)
+            } else {
+              alert('Товар уже добавлен в заказ')
+            }
+          }}
+        />
       </Popup>
     </>
   )
