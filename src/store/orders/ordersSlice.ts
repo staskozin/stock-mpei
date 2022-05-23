@@ -4,7 +4,7 @@ import { Product } from '../products/productsSlice'
 
 export interface Order {
   number: number
-  date: Date
+  date: string
   products: Array<Product>
 }
 
@@ -13,7 +13,7 @@ export type OrdersState = Array<Order>
 const initialState: OrdersState = [
   {
     "number": 2,
-    "date": new Date("2022-05-01T10:12:58.676Z"),
+    "date": "2022-05-01T10:12:58.676Z",
     "products": [
       {
         "name": "LADA (ВАЗ) Kalina I",
@@ -24,7 +24,7 @@ const initialState: OrdersState = [
   },
   {
     "number": 1,
-    "date": new Date("2022-05-01T06:32:10.409Z"),
+    "date": "2022-05-01T06:32:10.409Z",
     "products": [
       {
         "name": "Volkswagen Polo V",

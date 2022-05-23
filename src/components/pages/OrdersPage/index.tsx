@@ -40,11 +40,12 @@ const OrdersPage = () => {
             const sum = o.products.reduce((acc, cur) => {
               return acc + cur.price * cur.quantity
             }, 0)
+            const date = new Date(o.date)
             return (
               <div className={s.order} key={o.number}>
                 <span className={s.header}>Заказ №{o.number}</span>
-                <time className={s.datetime} dateTime={o.date.toISOString()}>
-                  от {o.date.toLocaleString('ru-RU')}
+                <time className={s.datetime} dateTime={date.toISOString()}>
+                  от {date.toLocaleString('ru-RU')}
                 </time>
                 <IconButton icon='delete' handler={() => dispatch(remove(o.number))} />
                 <span className={s.sum}>Сумма: <span>{formatPrice(sum)}</span></span>
