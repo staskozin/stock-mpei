@@ -10,6 +10,8 @@ import { formatPrice } from '../../helpers'
 import IconButton from '../UI/IconButton'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
+import Radio from '../UI/Radio'
+import Radios from '../UI/Radios'
 
 const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
   const { products, dispatch } = props
@@ -29,52 +31,16 @@ const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
   return (
     <>
       <div>
-        <span>Сортировать по</span>
-        <label>
-          <input
-            type='radio'
-            onChange={() => setSelectedSort('name')}
-            checked={selectedSort === 'name'}
-          />
-          <span>имени</span>
-        </label>
-        <label>
-          <input
-            type='radio'
-            onChange={() => setSelectedSort('price')}
-            checked={selectedSort === 'price'}
-          />
-          <span>цене</span>
-        </label>
-        <label>
-          <input
-            type='radio'
-            onChange={() => setSelectedSort('quantity')}
-            checked={selectedSort === 'quantity'}
-          />
-          <span>кол-ву</span>
-        </label>
+        <Radios text='Сортировать по'>
+          <Radio handler={() => setSelectedSort('quantity')} checked={selectedSort === 'quantity'} text='кол-ву' />
+          <Radio handler={() => setSelectedSort('price')} checked={selectedSort === 'price'} text='цене' />
+          <Radio handler={() => setSelectedSort('name')} checked={selectedSort === 'name'} text='имени' />
+        </Radios>
+        <Radios text='Порядок сортировки'>
+          <Radio handler={() => setSortOrder('DESC')} checked={sortOrder === 'DESC'} text='по убыванию' />
+          <Radio handler={() => setSortOrder('ASC')} checked={sortOrder === 'ASC'} text='по возрастанию' />
+        </Radios>
       </div>
-      <div>
-        <span>Порядок сортировки</span>
-        <label>
-          <input
-            type='radio'
-            onChange={() => setSortOrder('DESC')}
-            checked={sortOrder === 'DESC'}
-          />
-          <span>по убыванию</span>
-        </label>
-        <label>
-          <input
-            type='radio'
-            onChange={() => setSortOrder('ASC')}
-            checked={sortOrder === 'ASC'}
-          />
-          <span>по возрастанию</span>
-        </label>
-      </div>
-
       {
         products.length ?
           <table className={s.table}>
