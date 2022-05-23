@@ -5,6 +5,7 @@ import ProductsTable from '../products/ProductsTable'
 
 import {
   Order,
+  remove,
   selectOrders
 } from './ordersSlice'
 
@@ -23,19 +24,26 @@ const OrdersPage = () => {
         handler={() => { }}
       />
       {
-        orders.map((o: Order) => {
-          const sum = o.products.reduce((acc, cur) => {
-            return acc + cur.price * cur.quantity
-          }, 0)
-          return (
-            <div className={s.order} key={o.number}>
-              <span className={s.header}>Заказ №{o.number}</span>
-              <time className={s.datetime} dateTime={o.date.toISOString()}>от {o.date.toLocaleString('ru-RU')}</time>
-              <span className={s.sum}>Сумма: <span>{formatPrice(sum)}</span></span>
-              <ProductsTable products={o.products} />
-            </div>
-          )
-        })
+        orders.length
+          ? orders.map((o: Order) => {
+            const sum = o.products.reduce((acc, cur) => {
+              return acc + cur.price * cur.quantity
+            }, 0)
+            return (
+              <div className={s.order} key={o.number}>
+                <span className={s.header}>Заказ №{o.number}</span>
+                <time className={s.datetime} dateTime={o.date.toISOString()}>
+                  от {o.date.toLocaleString('ru-RU')}
+                </time>
+                <button className={s.button} onClick={() => dispatch(remove(o.number))}>
+                  <img src='/icon/delete.svg' alt='Удалить заказ' />
+                </button>
+                <span className={s.sum}>Сумма: <span>{formatPrice(sum)}</span></span>
+                <ProductsTable products={o.products} />
+              </div>
+            )
+          })
+          : <p>Список заказов пуст.</p>
       }
     </>
   )

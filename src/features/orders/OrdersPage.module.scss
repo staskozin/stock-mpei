@@ -11,6 +11,7 @@
 
 .datetime {
   font-size: 14px;
+  margin-right: 16px;
 }
 
 .sum {
@@ -20,5 +21,19 @@
 
   span {
     font-weight: bold;
+  }
+}
+
+.button {
+  border: none;
+  appearance: none;
+  background: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+
+  img {
+    position: relative;
+    top: 5px;
   }
 }
