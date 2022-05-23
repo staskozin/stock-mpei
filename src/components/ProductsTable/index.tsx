@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Popup from 'reactjs-popup'
 
 import { change, Product, remove } from '../../store/products/productsSlice'
-import { validateProducts } from '../../store/products/validators'
+import { validateProduct, validateProducts } from '../../store/products/validators'
 
 import s from './ProductsTable.module.scss'
 import 'reactjs-popup/dist/index.css'
@@ -124,7 +124,8 @@ const ProductsTable = (props: { products: Array<Product>, dispatch?: any }) => {
           handler={() => {
             const productsCopy: Array<Product> = JSON.parse(JSON.stringify(products))
             const index = products.findIndex((p: Product) => p.name === changingName)
-            if (index !== -1) {
+            if (index !== -1 && validateProduct({ name, price, quantity })) {
+              productsCopy[index] = { name, price, quantity }
               if (validateProducts(productsCopy)) {
                 dispatch(change({ name: changingName, changes: { name, price, quantity } }))
                 setIsEditing(false)
