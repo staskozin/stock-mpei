@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '..'
 import { Product } from '../products/productsSlice'
+import initialState from './initialState'
 
 export interface Order {
   number: number
@@ -9,36 +10,6 @@ export interface Order {
 }
 
 export type OrdersState = Array<Order>
-
-const initialState: OrdersState = [
-  {
-    "number": 2,
-    "date": "2022-05-01T10:12:58.676Z",
-    "products": [
-      {
-        "name": "LADA (ВАЗ) Kalina I",
-        "price": 189000,
-        "quantity": 1
-      }
-    ]
-  },
-  {
-    "number": 1,
-    "date": "2022-05-01T06:32:10.409Z",
-    "products": [
-      {
-        "name": "Volkswagen Polo V",
-        "price": 850000,
-        "quantity": 1
-      },
-      {
-        "name": "Kia Venga I",
-        "price": 920000,
-        "quantity": 1
-      }
-    ]
-  }
-]
 
 export const ordersSlice = createSlice({
   name: 'orders',
